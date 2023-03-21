@@ -1,3 +1,5 @@
+CREATE DATABASE web;
+
 DROP SCHEMA IF EXISTS relationship CASCADE;
 CREATE SCHEMA relationship;
 
@@ -21,6 +23,7 @@ CREATE TABLE relationship.person (
 );
 
 CREATE TABLE relationship.person_residence (
+    node_id SERIAL PRIMARY KEY,
 	person_id integer REFERENCES relationship.person ON DELETE CASCADE,
 	residence_id integer REFERENCES relationship.residence ON DELETE CASCADE
 );
