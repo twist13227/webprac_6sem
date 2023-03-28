@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class RelationDAOImpl extends CommonClassDAOImpl<Relation> implements RelationDAO {
+public class RelationDAOImpl extends CommonClassDAOImpl<Relation, Long> implements RelationDAO {
 
     public RelationDAOImpl(){
         super(Relation.class);
@@ -107,10 +107,9 @@ public class RelationDAOImpl extends CommonClassDAOImpl<Relation> implements Rel
         return getPersonByRelationType(person, Relation.RelType.ADOPTIVE_PARENT);
     }
     private List<Relation> getRelation(Relation.RelType reltype) {
-        try (Session session = openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<Relation> query = session.createQuery("FROM Relation WHERE relation_type = :gotType", Relation.class)
                     .setParameter("gotType", reltype);
-
             return query.getResultList();
         }
     }

@@ -1,6 +1,5 @@
 package ru.msu.cmc.prac.DAOs.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.msu.cmc.prac.DAOs.Person_ResidenceDAO;
 import ru.msu.cmc.prac.DAOs.ResidenceDAO;
@@ -13,13 +12,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class ResidenceDAOImpl extends CommonClassDAOImpl<Residence> implements ResidenceDAO {
+public class ResidenceDAOImpl extends CommonClassDAOImpl<Residence, Long> implements ResidenceDAO {
 
-    public ResidenceDAOImpl() {
+    public ResidenceDAOImpl(Person_ResidenceDAO person_residenceDAO) {
         super(Residence.class);
+        this.person_residenceDAO = person_residenceDAO;
     }
-    @Autowired
-    private Person_ResidenceDAO person_residenceDAO = new Person_ResidenceDAOImpl();
+    private final Person_ResidenceDAO person_residenceDAO;
 
     @Override
     public List<Person> getPlaceResidents(Residence residence) {

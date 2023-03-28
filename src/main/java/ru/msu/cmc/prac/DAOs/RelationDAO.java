@@ -5,7 +5,7 @@ import ru.msu.cmc.prac.classes.Relation;
 
 import java.util.List;
 
-public interface RelationDAO extends CommonClassDAO<Relation> {
+public interface RelationDAO extends CommonClassDAO<Relation, Long> {
     List<Person> getPersonByRelationType(Person person, Relation.RelType type);
     Person getMother(Person person);
     Person getFather(Person person);

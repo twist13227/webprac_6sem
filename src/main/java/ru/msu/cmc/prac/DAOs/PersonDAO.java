@@ -6,7 +6,7 @@ import ru.msu.cmc.prac.classes.Person;
 
 import java.util.List;
 
-public interface PersonDAO extends CommonClassDAO<Person> {
+public interface PersonDAO extends CommonClassDAO<Person, Long> {
     Person getSinglePersonByName(String personSurname, String personName, String personPatronymic);
     List<Person> getAllPersonByName(String personSurname, String personName, String personPatronymic);
     String getPersonLifeYears(Person person);

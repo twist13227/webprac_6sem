@@ -8,16 +8,14 @@ import jakarta.persistence.*;
 @Table(name = "person_residence")
 @Getter
 @Setter
-@ToString
-@NoArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class Person_Residence{
+public class Person_Residence  implements CommonClass<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "node_id")
-    private Integer node_id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
@@ -30,11 +28,4 @@ public class Person_Residence{
     @ToString.Exclude
     @NonNull
     private Residence residence_id;
-
-    public Integer getId(){
-        return node_id;
-    }
-    public void setId(Integer id){
-        node_id = id;
-    }
 }

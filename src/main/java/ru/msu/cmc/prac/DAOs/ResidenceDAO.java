@@ -5,6 +5,6 @@ import ru.msu.cmc.prac.classes.Residence;
 
 import java.util.List;
 
-public interface ResidenceDAO extends CommonClassDAO<Residence> {
+public interface ResidenceDAO extends CommonClassDAO<Residence, Long> {
     List<Person> getPlaceResidents(Residence residence);
 }

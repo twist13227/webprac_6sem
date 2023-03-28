@@ -1,4 +1,4 @@
-CREATE DATABASE web;
+CREATE DATABASE prac;
 
 DROP SCHEMA IF EXISTS relationship CASCADE;
 CREATE SCHEMA relationship;
@@ -17,8 +17,8 @@ CREATE TABLE relationship.person (
     name text NOT NULL,
     patronymic text,
 	gender text NOT NULL,
-	birth_date timestamp NOT NULL,
-	death_date timestamp,
+	birth_date text NOT NULL,
+	death_date text,
 	characteristics text
 );
 

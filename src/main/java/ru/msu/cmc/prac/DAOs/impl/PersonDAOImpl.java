@@ -15,17 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PersonDAOImpl extends CommonClassDAOImpl<Person> implements PersonDAO {
+public class PersonDAOImpl extends CommonClassDAOImpl<Person, Long> implements PersonDAO {
     public PersonDAOImpl() {
         super(Person.class);
     }
     @Override
     public List<Person> getAllPersonByName(String personSurname, String personName, String personPatronymic) {
-        try (Session session = openSession()) {
-            Query<Person> query = session.createQuery("FROM Person WHERE name LIKE :gotSurname AND surname LIKE :gotName AND patronymic like :gotPatronymic", Person.class)
-                    .setParameter("gotSurname", lookslike(personSurname))
-                    .setParameter("gotName", lookslike(personName))
-                    .setParameter("gotPatronymic", lookslike(personPatronymic));
+        try (Session session = sessionFactory.openSession()) {
+            Query<Person> query = session.createQuery("FROM Person WHERE surname LIKE :gotSurname AND name LIKE :gotName AND patronymic LIKE :gotPatronymic", Person.class)
+                    .setParameter("gotSurname", "%" + personSurname + "%")
+                    .setParameter("gotName", "%" + personName + "%")
+                    .setParameter("gotPatronymic", "%" + personPatronymic + "%");
             if (query.getResultList().size() == 0)
                 return null;
             else
@@ -49,12 +49,9 @@ public class PersonDAOImpl extends CommonClassDAOImpl<Person> implements PersonD
     @Override
     public String getPersonLifeYears(Person person) {
         String ret = "";
-        if (person.getBirth_date().toString() != null)
-            ret += person.getBirth_date().toString() + " - ";
-        else
-            ret += "Неизвестно - ";
-        if (person.getDeath_date().toString() != null)
-            ret += person.getDeath_date().toString();
+        ret += person.getBirth_date() + " - ";
+        if (person.getDeath_date() != null)
+            ret += person.getDeath_date();
         else
             ret += "н.в.";
         return ret;
@@ -70,19 +67,16 @@ public class PersonDAOImpl extends CommonClassDAOImpl<Person> implements PersonD
 
     @Override
     public List<Person> getPeopleByFilter(Filter filter) {
-        try (Session session = openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Person> criteriaQuery = builder.createQuery(Person.class);
             Root<Person> root = criteriaQuery.from(Person.class);
             List<Predicate> predicates = new ArrayList<>();
             if (filter.getName() != null)
-                predicates.add(builder.like(root.get("name"), lookslike(filter.getName())));
+                predicates.add(builder.like(root.get("name"), "%" + filter.getName() + "%"));
             if (predicates.size() != 0)
                 criteriaQuery.where(predicates.toArray(new Predicate[0]));
             return session.createQuery(criteriaQuery).getResultList();
         }
-    }
-    private String lookslike(String param) {
-        return "%" + param + "%";
     }
 }

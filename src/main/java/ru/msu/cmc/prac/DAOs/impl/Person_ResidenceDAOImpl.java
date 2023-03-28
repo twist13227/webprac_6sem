@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class Person_ResidenceDAOImpl extends CommonClassDAOImpl<Person_Residence> implements Person_ResidenceDAO {
+public class Person_ResidenceDAOImpl extends CommonClassDAOImpl<Person_Residence, Long> implements Person_ResidenceDAO {
 
     public Person_ResidenceDAOImpl() {
         super(Person_Residence.class);
     }
 
     @Override
-    public List<Residence> getPersonResidences(Integer id) {
+    public List<Residence> getPersonResidences(Long id) {
         List<Residence> residences_list = new ArrayList<>();
         for (Person_Residence person_residence : getAll()) {
             if (Objects.equals(person_residence.getPerson_id().getId(), id)) {
