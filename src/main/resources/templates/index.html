@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        h3 {text-align: center;}
+        p {text-align: center;}
+        .indent {
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="general :: page-header"></div>
+
+<div class="indent">
+    <h3 class="text-center">Система управления генеалогической информацией</h3>
+    <br>
+    <p> Возможности данного веб-сайта: добавлять, редактировать, удалять и получать в структурированном виде информацию о родственных связях </p>
+    <br>
+
+    <div th:replace="general :: site-footer"></div>
+</div>
+
+<div th:replace="general :: site-script"></div>
+
+</body>
+</html>

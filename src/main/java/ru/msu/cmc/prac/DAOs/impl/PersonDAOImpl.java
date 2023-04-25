@@ -13,6 +13,7 @@ import ru.msu.cmc.prac.classes.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class PersonDAOImpl extends CommonClassDAOImpl<Person, Long> implements PersonDAO {
@@ -50,7 +51,7 @@ public class PersonDAOImpl extends CommonClassDAOImpl<Person, Long> implements P
     public String getPersonLifeYears(Person person) {
         String ret = "";
         ret += person.getBirth_date() + " - ";
-        if (person.getDeath_date() != null)
+        if (!Objects.equals(person.getDeath_date(), ""))
             ret += person.getDeath_date();
         else
             ret += "н.в.";

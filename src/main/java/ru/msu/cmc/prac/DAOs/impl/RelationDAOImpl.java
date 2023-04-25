@@ -21,47 +21,38 @@ public class RelationDAOImpl extends CommonClassDAOImpl<Relation, Long> implemen
 
     @Override
     public List<Person> getPersonByRelationType(Person person, Relation.RelType type) {
-        if (type == Relation.RelType.SPOUSE) {
+        if (type == Relation.RelType.SPOUSE)
             return getSpouse(person);
-        }
         List<Person> res = new ArrayList<>();
-        for (var relation : getRelation(type)) {
-            if (Objects.equals(relation.getFirst_person_id().getId(), person.getId())) {
+        for (var relation : getRelation(type))
+            if (Objects.equals(relation.getFirst_person_id().getId(), person.getId()))
                 res.add(relation.getSecond_person_id());
-            }
-        }
         return res;
     }
 
     @Override
     public Person getMother(Person person) {
         List<Person> personList = getParents(person);
-        for (Person mother : personList) {
-            if (mother.getGender().equals("ж")) {
+        for (Person mother : personList)
+            if (mother.getGender().equals("ж"))
                 return mother;
-            }
-        }
         return null;
     }
 
     @Override
     public Person getFather(Person person) {
         List<Person> personList = getParents(person);
-        for (Person father : personList) {
-            if (father.getGender().equals("м")) {
+        for (Person father : personList)
+            if (father.getGender().equals("м"))
                 return father;
-            }
-        }
         return null;
     }
 
     @Override
     public boolean isBornInMarriage(Person person) {
-        for (Relation relation : getRelation(Relation.RelType.BASTARD)) {
-            if (Objects.equals(relation.getFirst_person_id().getId(), person.getId())) {
+        for (Relation relation : getRelation(Relation.RelType.BASTARD))
+            if (Objects.equals(relation.getFirst_person_id().getId(), person.getId()))
                 return false;
-            }
-        }
         return true;
     }
 
@@ -79,22 +70,18 @@ public class RelationDAOImpl extends CommonClassDAOImpl<Relation, Long> implemen
     @Override
     public Person getAdoptiveMother(Person person) {
         List<Person> personList = getAdoptiveParents(person);
-        for (Person adoptive_mother : personList) {
-            if (adoptive_mother.getGender().equals("ж")) {
+        for (Person adoptive_mother : personList)
+            if (adoptive_mother.getGender().equals("ж"))
                 return adoptive_mother;
-            }
-        }
         return null;
     }
 
     @Override
     public Person getAdoptiveFather(Person person) {
         List<Person> personList = getAdoptiveParents(person);
-        for (Person adoptive_father : personList) {
-            if (adoptive_father.getGender().equals("м")) {
+        for (Person adoptive_father : personList)
+            if (adoptive_father.getGender().equals("м"))
                 return adoptive_father;
-            }
-        }
         return null;
     }
 
@@ -117,11 +104,9 @@ public class RelationDAOImpl extends CommonClassDAOImpl<Relation, Long> implemen
     @Override
     public List<Person> getSpouse(Person person) {
         List<Person> res = new ArrayList<>();
-        for (var relation : getRelation(Relation.RelType.SPOUSE)) {
-            if (Objects.equals(relation.getFirst_person_id().getId(), person.getId())) {
+        for (var relation : getRelation(Relation.RelType.SPOUSE)) 
+            if (Objects.equals(relation.getFirst_person_id().getId(), person.getId()))
                 res.add(relation.getSecond_person_id());
-            }
-        }
         return res;
     }
 }

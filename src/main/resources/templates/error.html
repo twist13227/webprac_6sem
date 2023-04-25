@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Произошла ошибка!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+      h2  {text-align: center;}
+      .indent {
+        margin-left: 100px;
+        margin-right: 100px;
+        margin-top: 20px;
+      }
+    </style>
+</head>
+<body>
+
+<div th:replace="general :: page-header"> </div>
+
+<div class="indent">
+    <h2>Произошла ошибка!</h2>
+    <br>
+        <p>Запрашиваемый Вами ресурс недоступен или произошла ошибка при выполнении запроса.</p>
+    <br>
+
+    <div th:replace="general :: site-footer"></div>
+</div>
+
+<div th:replace="general :: site-script"></div>
+
+</body>
+</html>
