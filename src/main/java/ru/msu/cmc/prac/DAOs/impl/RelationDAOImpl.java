@@ -33,18 +33,22 @@ public class RelationDAOImpl extends CommonClassDAOImpl<Relation, Long> implemen
     @Override
     public Person getMother(Person person) {
         List<Person> personList = getParents(person);
-        for (Person mother : personList)
-            if (mother.getGender().equals("ж"))
+        for (Person mother : personList) {
+            if (mother.getGender().equals("ж")) {
                 return mother;
+            }
+        }
         return null;
     }
 
     @Override
     public Person getFather(Person person) {
         List<Person> personList = getParents(person);
-        for (Person father : personList)
-            if (father.getGender().equals("м"))
+        for (Person father : personList) {
+            if (father.getGender().equals("м")) {
                 return father;
+            }
+        }
         return null;
     }
 

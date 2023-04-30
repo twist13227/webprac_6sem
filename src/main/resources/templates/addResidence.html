@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style>
+    .indent {
+      margin-left: 100px;
+      margin-right: 100px;
+      margin-top: 20px;
+    }
+  </style>
+  <title>Добавить новое место жительства</title>
+</head>
+
+<body>
+<div th:replace="general :: page-header"> </div>
+
+<div class="indent">
+  <h2>Изменить место в базе</h2>
+  <form method="post" action="/addResidence">
+    <div class="form-group">
+      <label for="Id">Идентификационный номер:</label>
+      <input type="number" class="form-control" id="Id" name="Id" required>
+    </div>
+    <div class="form-group">
+      <label for="country">Страна:</label>
+      <input type="text" class="form-control" id="country" name="country" required>
+    </div>
+    <div class="form-group">
+      <label for="town">Город:</label>
+      <input type="text" class="form-control" id="town" name="town" required>
+    </div>
+    <div class="form-group">
+      <label for="address">Адрес:</label>
+      <input type="text" class="form-control" id="address" name="address" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Описание:</label>
+      <input type="text" class="form-control" id="description" name="description" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+  </form>
+</div>
+<div th:replace="general :: site-script"></div>
+
+</body>
+</html>

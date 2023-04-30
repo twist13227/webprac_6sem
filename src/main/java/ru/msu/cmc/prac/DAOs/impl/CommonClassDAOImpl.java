@@ -30,9 +30,6 @@ public abstract class CommonClassDAOImpl<T extends CommonClass<ID>, ID extends S
     @Override
     public void save(T entity) {
         try (Session session = sessionFactory.openSession()) {
-            if (entity.getId() != null) {
-                entity.setId(null);
-            }
             session.beginTransaction();
             session.merge(entity);
             session.getTransaction().commit();

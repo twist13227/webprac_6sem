@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Информация о месте</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style>
+    .indent {
+      margin-left: 100px;
+      margin-right: 100px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="general :: page-header"> </div>
+
+<div class="indent">
+  <div id="placeInfo">
+    <h4 th:text="${residence.getCountry()} + ', ' + ${residence.getTown()} + ', ' + ${residence.getAddress()}"></h4>
+    <p th:text="'Адрес: ' + ${residence.getCountry()} + ', ' + ${residence.getTown()} + ', ' + ${residence.getAddress()}"></p>
+    <p th:text="'Описание: ' + ${residence.getDescription()}"></p>
+
+    <p> Резиденты данного места:&nbsp <span
+            th:if="${residenceService.getPlaceResidents(residence).size() == 0}"> Нет зарегистрированных жителей</span>
+      <a th:each="person, iter: ${residenceService.getPlaceResidents(residence)}"
+         th:href="'/person?personId=' + ${person.getId()}">
+        <span th:text="${person.getSurname()} + ' ' + ${person.getName()} + ' ' + ${person.getPatronymic()} + ${!iter.last ? ',' : ''}"></span>
+      </a>
+    </p>
+  </div>
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+      <form style="margin-right: 30px" method="get" action="/editResidence">
+        <input type="hidden" name="Id" th:value="${residence.getId()}"/>
+        <button id="editButton" type="submit" class="btn btn-secondary">Редактировать информацию об этом месте
+        </button>
+      </form>
+      <form style="margin-right: 30px" method="post" action="/deleteResidence">
+        <input type="hidden" name="residenceId" th:value="${residence.getId()}"/>
+        <button id="deleteButton" type="submit" class="btn btn-secondary">Удалить место из базы
+        </button>
+      </form>
+    </div>
+  </div>
+  <div th:replace="general :: site-footer"></div>
+</div>
+<div th:replace="general :: site-script"></div>
+</body>
+</html>

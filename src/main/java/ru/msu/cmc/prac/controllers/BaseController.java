@@ -10,13 +10,13 @@ public class BaseController {
         return "index";
     }
 
-    @RequestMapping(value = "/allPeople" )
+    @RequestMapping(value = "/people" )
     public String allPerson() {
         return "people";
     }
 
-    @RequestMapping(value = "/generateTree")
+    @RequestMapping(value = "/tree")
     public String generateTree() {
-        return "generateTree";
+        return "tree";
     }
 }

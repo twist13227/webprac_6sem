@@ -1,4 +1,4 @@
-INSERT INTO relationship.residence(country, town, address, description) VALUES
+INSERT INTO public.residence(country, town, address, description) VALUES
 	('Россия', 'Москва', 'улица Пушкина, дом 5, кв. 50', 'Квартира в спальном районе Москвы'),
 	('Россия', 'Санкт-Петербург', 'улица Лермонтова, дом 53, кв. 10', 'Квартира в спальном районе Санкт-Петербурга'),
 	('Россия', 'Омск', 'улица Булгакова, дом 10, кв. 23', 'Квартира в центре Омска'),
@@ -11,15 +11,15 @@ INSERT INTO relationship.residence(country, town, address, description) VALUES
 	('Россия', 'Краснознаменск', 'улица Маркса, дом 37, ', 'Частный дом в Подмосковье');
 	
 	
-INSERT INTO relationship.person(surname, name, patronymic, gender, birth_date, characteristics) VALUES
+INSERT INTO public.person(surname, name, patronymic, gender, birth_date, characteristics) VALUES
 		('Тютиков', 'Эдуард', 'Леонидович', 'м', '1975-06-05', 'Работает программистом в Яндексе. Домосед'),
         ('Курылкина', 'Карина', 'Альбертовна', 'ж', '1970-11-08', 'Любящая жена и мать, работает вместе с мужем в технической академии Росатома'),
         ('Курылкин', 'Геннадий', 'Ярославович', 'м', '1968-08-02',  'Семьянин, работает вместе с женой в технической академии Росатома');
         
-INSERT INTO relationship.person(surname, name, patronymic, gender, birth_date, death_date, characteristics) VALUES       
+INSERT INTO public.person(surname, name, patronymic, gender, birth_date, death_date, characteristics) VALUES
         ('Грачевская', 'Анна', 'Антоновна', 'ж', '1940-06-22', '2020-12-10', 'Одинокая женищна, работала няней');
         
-INSERT INTO relationship.person(surname, name, patronymic, gender, birth_date, characteristics) VALUES        
+INSERT INTO public.person(surname, name, patronymic, gender, birth_date, characteristics) VALUES
 	('Бабина', 'Марина', 'Казимировна', 'ж', '1960-03-09', 'Повар в пекарне, любит мужа несмотря на его пьянки'),
 	('Бабин', 'Вадим', 'Олегович', 'м', '1962-02-22', 'Алкоголик, работающий на заводе'),
 	('Носова', 'Римма', 'Олеговна', 'ж', '1985-04-18', 'Жена бизнесмена, домохозяйка'),
@@ -28,7 +28,7 @@ INSERT INTO relationship.person(surname, name, patronymic, gender, birth_date, c
 	('Курылкин', 'Эмиль', 'Геннадьевич', 'м', '2001-10-09', 'Студент, учится на ВМК МГУ');
 
 
-INSERT INTO relationship.person_residence (person_id, residence_id) VALUES
+INSERT INTO public.person_residence (person_id, residence_id) VALUES
 	(1, 1),
 	(2, 2),
 	(3, 2),
@@ -44,21 +44,21 @@ INSERT INTO relationship.person_residence (person_id, residence_id) VALUES
 	(3, 9),
 	(7, 8),
 	(8, 8);
-INSERT INTO relationship.relation(first_person_id, second_person_id, relation_type, information) VALUES
-	(2, 3, 'spouse', 'Дата женитьбы: 2000-03-19'),
-	(3, 2, 'spouse', 'Дата женитьбы: 2000-03-19'),
-	(2, 10, 'parent', 'Единственный сын'),
-	(3, 10, 'parent', 'Единственный сын'),
-	(10, 2, 'child', 'Сильно любим родителями'),
-	(10, 3, 'child', 'Сильно любим родителями'),
-	(4, 5, 'parent', 'Родила от мужчины, который от нее сбежал'),
-	(5, 4, 'child', 'Видела только маму'),
-	(5, 6, 'spouse', 'Дата женитьбы: 1985-07-21'),
-	(6, 5, 'spouse', 'Дата женитьбы: 1985-07-21'),
-	(7, 8, 'spouse', 'Дата женитьбы: 2010-12-03'),
-	(7, 8, 'spouse', 'Дата женитьбы: 2010-12-03'),
-	(7, 9, 'adoptive parent', 'Не может иметь своих детей, поэтому взял дочь из детдома'),
-	(9, 7, 'adopted child', 'Любит приёмного отца, своих родителей не знает');
+INSERT INTO public.relation(first_person_id, second_person_id, relation_type, information) VALUES
+	(2, 3, 4, 'Дата женитьбы: 2000-03-19'),
+	(3, 2, 4, 'Дата женитьбы: 2000-03-19'),
+	(2, 10, 0, 'Единственный сын'),
+	(3, 10, 0, 'Единственный сын'),
+	(10, 2, 1, 'Сильно любим родителями'),
+	(10, 3, 1, 'Сильно любим родителями'),
+	(4, 5, 0, 'Родила от мужчины, который от нее сбежал'),
+	(5, 4, 1, 'Видела только маму'),
+	(5, 6, 4, 'Дата женитьбы: 1985-07-21'),
+	(6, 5, 4, 'Дата женитьбы: 1985-07-21'),
+	(7, 8, 4, 'Дата женитьбы: 2010-12-03'),
+	(7, 8, 4, 'Дата женитьбы: 2010-12-03'),
+	(7, 9, 7, 'Не может иметь своих детей, поэтому взял дочь из детдома'),
+	(9, 7, 6, 'Любит приёмного отца, своих родителей не знает');
 	
 	
 	

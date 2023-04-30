@@ -51,7 +51,7 @@ public class PersonDAOImpl extends CommonClassDAOImpl<Person, Long> implements P
     public String getPersonLifeYears(Person person) {
         String ret = "";
         ret += person.getBirth_date() + " - ";
-        if (!Objects.equals(person.getDeath_date(), ""))
+        if (!Objects.equals(person.getDeath_date(), null))
             ret += person.getDeath_date();
         else
             ret += "н.в.";

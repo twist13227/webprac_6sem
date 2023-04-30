@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Добавить новое отношение</title>
+</head>
+
+<body>
+<div th:replace="general :: page-header"> </div>
+
+<div class="indent">
+    <h2>Добавить отношение в базу</h2>
+    <form method="post" action="/addRelation">
+        <div class="form-group">
+            <label for="Id">Идентификационный номер:</label>
+            <input type="number" class="form-control" id="Id" name="Id" required>
+        </div>
+        <div class="form-group">
+            <label for="first_person_id">Номер в базе первого человека:</label>
+            <input type="number" class="form-control" id="first_person_id" name="first_person_id" required>
+        </div>
+        <div class="form-group">
+            <label for="second_person_id">Номер в базе второго человека:</label>
+            <input type="number" class="form-control" id="second_person_id" name="second_person_id" required>
+        </div>
+        <div class="form-group">
+            <label for="relation_type"> Тип взаимоотношения: </label>
+            <br>
+            <select name="relation_type" id="relation_type" size="4">
+                <option th:value="${parent}"> Родитель </option>
+                <option th:value="${child}"> Ребёнок </option>
+                <option th:value="${parent_in_law}"> Отчим/мачеха </option>
+                <option th:value="${child_in_law}"> Пасынок/падчерица </option>
+                <option th:value="${spouse}"> Супруг(а) </option>
+                <option th:value="${bastard}"> Внебрачный ребёнок </option>
+                <option th:value="${adopted_child}"> Приёмный ребёнок </option>
+                <option th:value="${adoptive_parent}"> Приёмный родитель </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="information">Информация:</label>
+            <input type="text" class="form-control" id="information" name="information" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+<div th:replace="general :: site-script"></div>
+
+</body>
+</html>

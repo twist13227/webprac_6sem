@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Редактировать место</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="general :: page-header"> </div>
+
+<div class="indent">
+    <h2>Изменить отношение в базе</h2>
+    <form method="post" action="/editRelation">
+        <div class="form-group">
+            <label for="Id">Идентификационный номер:</label>
+            <input type="number" class="form-control" id="Id" name="Id" required th:value="${relation.getId()}">
+        </div>
+        <div class="form-group">
+            <label for="first_person_id">Номер в базе первого человека:</label>
+            <input type="number" class="form-control" id="first_person_id" name="first_person_id" required th:value="${relation.getFirst_person_id().getId()}">
+        </div>
+        <div class="form-group">
+            <label for="second_person_id">Номер в базе второго человека:</label>
+            <input type="number" class="form-control" id="second_person_id" name="second_person_id" required th:value="${relation.getSecond_person_id().getId()}">
+        </div>
+        <div class="form-group">
+            <label for="relation_type">Тип взаимоотношения:</label>
+            <input class="form-control" id="relation_type" name="relation_type" required th:value="${relation.getRelation_type()}">
+        </div>
+        <div class="form-group">
+            <label for="information">Информация:</label>
+            <input type="text" class="form-control" id="information" name="information" required th:value="${relation.getInformation()}">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Сохранить">
+    </form>
+</div>
+
+<div th:replace="general :: site-script"></div>
+
+</body>
+</html>

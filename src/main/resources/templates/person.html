@@ -19,18 +19,20 @@
 
 <div class="indent">
   <div id="personInfo">
-    <h4 th:text="${person.getSurname()}+${person.getName()}+${person.getPatronymic()}"></h4>
+    <h4 th:text="${person.getSurname()} + ' ' + ${person.getName()} + ' ' + ${person.getPatronymic()}"></h4>
     <p th:if="${person.getId() != null}" th:text="'Идентификационный номер: ' + ${person.getId()}"></p>
-    <p th:if="${person.getSurname() != null} and ${person.getName() != null} and ${person.getPatronymic() != null}" th:text="'ФИО: ' + ${person.getSurname()} + ${person.getName()}  + ${person.getPatronymic()}"></p>
+    <p th:if="${person.getSurname() != null} and ${person.getName() != null} and ${person.getPatronymic() != null}" th:text="'ФИО: ' + ${person.getSurname()} + ' ' +  ${person.getName()} + ' ' + ${person.getPatronymic()}"></p>
     <p th:if="${person.getGender() != null}" th:text="'Пол: ' + ${person.getGender()}"></p>
     <p th:if="${personService.getPersonLifeYears(person) != null}" th:text="'Годы жизни: ' + ${personService.getPersonLifeYears(person)}"></p>
     <p th:if="${relationService.isBornInMarriage(person) == false}" th:text="'Законнорожденный: нет'"></p>
     <p th:if="${relationService.isBornInMarriage(person) == true}" th:text="'Законнорожденный: да'"></p>
     <p th:if="${person.getCharacteristics() != null}" th:text="'Краткая характеристика: ' + ${person.getCharacteristics()}"></p>
 
-    <p> Места проживания:&nbsp <span th:if="${person_residenceService.getPersonResidences(person.getId()) == null}">нет</span>
-      <a th:each="residence, iter: ${person_residenceService.getPersonResidences(person.getId())}" th:href="'/place?placeId=' + ${residence.getId()}">
-        <span th:text="${residence.getCountry()} + ${residence.getTown()} + ${residence.getAddress()} + ${!iter.last ? ',' : ''}"></span>
+    <p> Места проживания:&nbsp <span
+            th:if="${person_residenceService.getPersonResidences(person.getId()).size() == 0}">Нет</span>
+      <a th:each="residence, iter: ${person_residenceService.getPersonResidences(person.getId())}"
+         th:href="'/residence?residenceId=' + ${residence.getId()}">
+        <span th:text="${residence.getCountry()} + ', '  + ${residence.getTown()} + ', '  +${residence.getAddress()} + ${!iter.last ? ';' : ''}"></span>
       </a>
     </p>
 
@@ -39,8 +41,9 @@
   <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
     <div class="btn-group mr-2" role="group" aria-label="First group">
       <form style="margin-right: 30px" method="get" action="/editPerson">
-        <input type="hidden" name="personId" th:value="${person.getId()}"/>
-        <button id="editButton" type="submit" class="btn btn-secondary">Редактировать информацию о человеке</button>
+        <input type="hidden" name="Id" th:value="${person.getId()}"/>
+        <button id="editButton" type="submit" class="btn btn-secondary">Редактировать информацию о человеке
+        </button>
       </form>
       <form method="post" action="/removePerson">
         <input type="hidden" name="personId" th:value="${person.getId()}"/>

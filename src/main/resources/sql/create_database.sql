@@ -1,9 +1,9 @@
 CREATE DATABASE prac;
 
-DROP SCHEMA IF EXISTS relationship CASCADE;
-CREATE SCHEMA relationship;
+DROP SCHEMA IF EXISTS public CASCADE;
+CREATE SCHEMA public;
 
-CREATE TABLE relationship.residence (
+CREATE TABLE public.residence (
     residence_id SERIAL PRIMARY KEY,
     country text NOT NULL,
 	town text NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE relationship.residence (
 	description text
 );
 
-CREATE TABLE relationship.person (
+CREATE TABLE public.person (
     person_id SERIAL PRIMARY KEY,
     surname text NOT NULL,
     name text NOT NULL,
@@ -22,17 +22,17 @@ CREATE TABLE relationship.person (
 	characteristics text
 );
 
-CREATE TABLE relationship.person_residence (
+CREATE TABLE public.person_residence (
     node_id SERIAL PRIMARY KEY,
-	person_id integer REFERENCES relationship.person ON DELETE CASCADE,
-	residence_id integer REFERENCES relationship.residence ON DELETE CASCADE
+	person_id integer REFERENCES public.person ON DELETE CASCADE,
+	residence_id integer REFERENCES public.residence ON DELETE CASCADE
 );
 
-CREATE TABLE relationship.relation (
+CREATE TABLE public.relation (
     relation_id SERIAL PRIMARY KEY,
-    first_person_id integer REFERENCES relationship.person ON DELETE CASCADE,
-	second_person_id integer REFERENCES relationship.person ON DELETE CASCADE,
-	relation_type text NOT NULL,
+    first_person_id integer REFERENCES public.person ON DELETE CASCADE,
+	second_person_id integer REFERENCES public.person ON DELETE CASCADE,
+	relation_type integer NOT NULL,
 	information text
 );
 

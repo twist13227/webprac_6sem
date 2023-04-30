@@ -16,6 +16,7 @@ import ru.msu.cmc.prac.DAOs.impl.Person_ResidenceDAOImpl;
 import ru.msu.cmc.prac.DAOs.impl.RelationDAOImpl;
 import ru.msu.cmc.prac.DAOs.impl.ResidenceDAOImpl;
 import ru.msu.cmc.prac.classes.Person;
+import ru.msu.cmc.prac.classes.Residence;
 
 import java.util.List;
 
@@ -78,6 +79,42 @@ public class PersonController {
         return "redirect:/people";
     }
 
+    @GetMapping("editPerson")
+    public String editPersonGet(@RequestParam(name = "Id") Long Id, Model model) {
+        if (Id == null) {
+            model.addAttribute("person", new Person());
+            return "editPerson";
+        }
+        Person person = personDAO.getById(Id);
+        if (person == null) {
+            model.addAttribute("error_msg", "В базе нет человека, ID которого равен " + Id);
+            return "errorPage";
+        }
+        model.addAttribute("person", person);
+        return "editPerson";
+    }
+    @PostMapping("/editPerson")
+    public String editResidencePage(@RequestParam(name = "Id") Long Id,
+                                    @RequestParam(name = "surname") String surname,
+                                    @RequestParam(name = "name") String name,
+                                    @RequestParam(name = "patronymic") String patronymic,
+                                    @RequestParam(name = "gender") String gender,
+                                    @RequestParam(name = "birth_date", required = false) String birth_date,
+                                    @RequestParam(name = "death_date", required = false) String death_date,
+                                    @RequestParam(name = "characteristics", required = false) String characteristics,
+                                    RedirectAttributes redirectAttributes) {
+        Person person = personDAO.getById(Id);
+        person.setSurname(surname);
+        person.setName(name);
+        person.setPatronymic(patronymic);
+        person.setGender(gender);
+        person.setBirth_date(birth_date);
+        person.setDeath_date(death_date);
+        person.setCharacteristics(characteristics);
+        personDAO.save(person);
+        redirectAttributes.addFlashAttribute("message", "Информация о человеке успешно отредактирована в базе!");
+        return "redirect:/people";
+    }
     @PostMapping("/removePerson")
     public String removePersonPage(@RequestParam(name = "personId") Long personId) {
         personDAO.deleteById(personId);

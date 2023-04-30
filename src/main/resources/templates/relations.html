@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Места</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style>
+    .indent {
+      margin-left: 100px;
+      margin-right: 100px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="general :: page-header"></div>
+
+<div class="indent">
+  <form method="get" action="/addRelation">
+    <button id="addRelationButton" type="submit" class="btn btn-primary" th:href="addRelation.html">Добавить новую информацию о взаимоотношениях</button>
+  </form>
+  <br>
+
+  <table class="table table-bordered table-warning">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col"> Порядковый номер </th>
+      <th scope="col"> Первый человек </th>
+      <th scope="col"> Второй человек </th>
+      <th scope="col"> Тип отношений </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${relations.isEmpty()}">
+      <td colspan="6"> База данных пока что пуста. </td>
+    </tr>
+    <tr th:each="relation : ${relations}">
+      <td><a th:href="'/relation?relationId=' + ${relation.getId()}"><span
+              th:text="${relation.getId()}"> </span></a></td>
+      <td><a th:href="'/person?personId=' + ${relation.getFirst_person_id().getId()}"><span
+              th:text="${relation.getFirst_person_id().getSurname()} + ' ' + ${relation.getFirst_person_id().getName()}  + ' ' + ${relation.getFirst_person_id().getPatronymic()}"> </span></a></td>
+      <td><a th:href="'/person?personId=' + ${relation.getSecond_person_id().getId()}"><span
+              th:text="${relation.getSecond_person_id().getSurname()} + ' ' + ${relation.getSecond_person_id().getName()}  + ' ' + ${relation.getSecond_person_id().getPatronymic()}"> </span></a></td>
+      <td>
+        <span th:text="${relation.getRelation_type()}"> </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div th:replace="general :: site-script"></div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 20px;
+        }
+    </style>
+    <title>Информация об отношениях</title>
+</head>
+
+<body>
+<div th:replace="general :: page-header"> </div>
+
+<div class="indent">
+    <div id="relationInfo">
+        <h4 th:text="${relation.getId()}"></h4>
+        <p th:if="${relation.getId() != null}" th:text="'Идентификационный номер: ' + ${relation.getId()}"></p>
+        <p th:if="${relation.getFirst_person_id().getSurname() != null} and ${relation.getFirst_person_id().getName() != null} and ${relation.getFirst_person_id().getPatronymic() != null}" th:text="'ФИО первого человека: ' + ${relation.getFirst_person_id().getSurname()} + ' ' +  ${relation.getFirst_person_id().getName()} + ' ' + ${relation.getFirst_person_id().getPatronymic()}"></p>
+        <p th:if="${relation.getSecond_person_id().getSurname() != null} and ${relation.getSecond_person_id().getName() != null} and ${relation.getSecond_person_id().getPatronymic() != null}" th:text="'ФИО второго человека: ' + ${relation.getSecond_person_id().getSurname()} + ' ' +  ${relation.getSecond_person_id().getName()} + ' ' + ${relation.getSecond_person_id().getPatronymic()}"></p>
+        <p th:if="${relation.getRelation_type() != null}" th:text="'Тип отношений: ' + ${relation.getRelation_type()}"></p>
+        <p th:if="${relation.getInformation() != null}" th:text="'Подробности: ' + ${relation.getInformation()}"></p>
+
+    </div>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <form style="margin-right: 30px" method="get" action="/editRelation">
+                <input type="hidden" name="Id" th:value="${relation.getId()}"/>
+                <button id="editButton" type="submit" class="btn btn-secondary">Редактировать информацию об отношении
+                </button>
+            </form>
+            <form method="post" action="/removeRelation">
+                <input type="hidden" name="relationId" th:value="${relation.getId()}"/>
+                <button id="deleteButton" type="submit" class="btn btn-secondary">Удалить отношение из базы</button>
+            </form>
+        </div>
+    </div>
+    <div th:replace="general :: site-footer"></div>
+</div>
+
+<div th:replace="general :: site-script"></div>
+
+</body>
+</html>
