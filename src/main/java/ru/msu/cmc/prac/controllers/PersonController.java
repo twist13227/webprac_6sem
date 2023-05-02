@@ -70,7 +70,7 @@ public class PersonController {
                                  @RequestParam(name = "patronymic") String patronymic,
                                  @RequestParam(name = "gender") String gender,
                                  @RequestParam(name = "birth_date", required = false) String birth_date,
-                                 @RequestParam(name = "death_date", required = false) String death_date,
+                                 @RequestParam(name = "death_date", required = false, defaultValue = "") String death_date,
                                  @RequestParam(name = "characteristics", required = false) String characteristics,
                                  RedirectAttributes redirectAttributes) {
         Person newPerson = new Person(Id, surname, name, patronymic, gender, birth_date, death_date, characteristics);

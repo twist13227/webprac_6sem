@@ -68,14 +68,14 @@ public class RelationController {
     }
     @PostMapping("/editRelation")
     public String editRelationPage(@RequestParam(name = "Id") Long Id,
-                                    @RequestParam(name = "first_person") Person first_person,
-                                    @RequestParam(name = "second_person") Person second_person,
+                                    @RequestParam(name = "first_person_id") Long first_person_id,
+                                    @RequestParam(name = "second_person_id") Long second_person_id,
                                     @RequestParam(name = "relation_type") Relation.RelType relation_type,
                                     @RequestParam(name = "information", required = false) String information,
                                     RedirectAttributes redirectAttributes) {
         Relation relation = relationDAO.getById(Id);
-        relation.setFirst_person_id(first_person);
-        relation.setSecond_person_id(second_person);
+        relation.setFirst_person_id(personDAO.getById(first_person_id));
+        relation.setSecond_person_id(personDAO.getById(second_person_id));
         relation.setRelation_type(relation_type);
         relation.setInformation(information);
         relationDAO.save(relation);
